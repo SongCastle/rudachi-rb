@@ -1,0 +1,29 @@
+#!/bin/sh
+
+setup_sudachi () {
+    if [ -e sudachi ]; then
+        rm -rf sudachi
+    fi
+    mkdir -p sudachi/tmp
+    cd sudachi
+    wget -q -O tmp/sudachi-executable.zip https://github.com/WorksApplications/Sudachi/releases/download/v0.5.3/sudachi-0.5.3-executable.zip
+    wget -q -O tmp/sudachi-dictionary.zip http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-latest-full.zip
+    unzip -jqq -d tmp tmp/sudachi-executable.zip *.jar
+    unzip -jqq -d tmp tmp/sudachi-dictionary.zip *.dic
+    mv tmp/*.jar tmp/*.dic ./
+    mv system_full.dic system_core.dic
+    rm -rf tmp
+    touch sync
+}
+
+echo -n "\rInstalling Sudachi"
+setup_sudachi &
+
+until [ -e sudachi/sync ]
+do
+    echo -n "."
+    sleep 1
+done
+rm -f sudachi/sync
+
+echo "\nFinish setting up Sudachi !!"
