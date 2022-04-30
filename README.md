@@ -1,6 +1,6 @@
 # Rudachi-rb
 Ruby wrapper for [Sudachi](https://github.com/WorksApplications/Sudachi).<br>
-([rudachi](https://github.com/SongCastle/rudachi) wrapper for Ruby)
+([rudachi](https://github.com/SongCastle/rudachi) for Ruby)
 
 #### Text
 ```rb
